@@ -1,5 +1,6 @@
 package com.example.restapiretrofit;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,5 +21,8 @@ public interface ApiInterface {
 
     @POST("posts")
     public Call<Post> storePost(@Body Post post);
+
+    @POST("posts")
+    public Call<Post> storePost(@Body HashMap<Object , Object> map);
 
 }

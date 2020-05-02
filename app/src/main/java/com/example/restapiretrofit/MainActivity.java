@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         Post post = new Post(5, "ibrahim", "this is my name");
 
+        HashMap<Object,Object> map = new HashMap<>();
+        map.put("userId" , "Ibrahim Khaled");
+        map.put("title" , "My name");
+        map.put("body" , "My fullname is ibrahim khaled ibrahim");
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -54,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-        Call<Post> call = apiInterface.storePost(post);
+        Call<Post> call = apiInterface.storePost(map);
 
         call.enqueue(new Callback<Post>() {
             @Override
