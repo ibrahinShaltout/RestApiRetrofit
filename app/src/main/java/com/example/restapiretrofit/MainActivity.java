@@ -1,6 +1,10 @@
 package com.example.restapiretrofit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -18,8 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.tv_feedback)
-    TextView textView_feedback;
+    @BindView(R.id.recyclerview)
+    RecyclerView postsRecyclerView;
+    PostViewModel postViewModel ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,50 +34,17 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 ////////////////////////////////////////////////////
 
-
-        Post post = new Post(5, "ibrahim", "this is my name");
-
-        HashMap<Object,Object> map = new HashMap<>();
-        map.put("userId" , "Ibrahim Khaled");
-        map.put("title" , "My name");
-        map.put("body" , "My fullname is ibrahim khaled ibrahim");
+        postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+        postViewModel.getPosts();
+        PostAdapter postAdapter = new PostAdapter();
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        postsRecyclerView.setAdapter(postAdapter);
 
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-
-//        Call<List<Post>> call = aopInterface.getPost("2");
-//
-//        call.enqueue(new Callback<List<Post>>() {
-//            @Override
-//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-//                textView_feedback.setText(response.body().get(0).getTitle());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Post>> call, Throwable t) {
-//                textView_feedback.setText(t.getMessage());
-//
-//            }
-//        });
-
-
-        Call<Post> call = apiInterface.storePost(map);
-
-        call.enqueue(new Callback<Post>() {
+        postViewModel.mutableLiveData.observe(this, new Observer<List<PostModel>>() {
             @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
-                textView_feedback.setText(response.body().getTitle());
-
-            }
-
-            @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                textView_feedback.setText(t.getMessage());
+            public void onChanged(List<PostModel> postModels) {
+                postAdapter.setPostList(postModels);
             }
         });
     }

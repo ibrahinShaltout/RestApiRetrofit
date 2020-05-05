@@ -3,7 +3,7 @@ package com.example.restapiretrofit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Post {
+public class PostModel {
     @SerializedName("userid")
     @Expose
     private int userid;
@@ -20,7 +20,7 @@ public class Post {
     @Expose
     private String body;
 
-    public Post(int userid, String title, String body) {
+    public PostModel(int userid, String title, String body) {
         this.userid = userid;
         this.title = title;
         this.body = body;
