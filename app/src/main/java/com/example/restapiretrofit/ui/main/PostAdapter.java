@@ -1,4 +1,4 @@
-package com.example.restapiretrofit;
+package com.example.restapiretrofit.ui.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.restapiretrofit.R;
+import com.example.restapiretrofit.pojo.PostModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull PostAdapter.PostViewHolder holder, int position) {
 
         holder.title.setText(postList.get(position).getTitle());
-        holder.UserId.setText(postList.get(position).getUserid()+"");
+        holder.UserId.setText(postList.get(position).getUserid() + "");
         holder.body.setText(postList.get(position).getBody());
     }
 
@@ -37,9 +40,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return postList.size();
     }
 
-    public void setPostList (List<PostModel> postList)
-    {
-        this.postList=postList;
+    public void setPostList(List<PostModel> postList) {
+        this.postList = postList;
         notifyDataSetChanged();
     }
 

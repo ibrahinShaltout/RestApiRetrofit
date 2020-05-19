@@ -1,4 +1,4 @@
-package com.example.restapiretrofit;
+package com.example.restapiretrofit.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -42,9 +42,14 @@ dependencies {
 //    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+
+
     //Butter Knife
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
 
     // ViewModel and LiveData
     def lifecycle_version = "2.1.0"
@@ -56,4 +61,10 @@ dependencies {
 
     //recyclerview
     implementation 'com.android.support:recyclerview-v7:29.0.0'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.17'
+
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 }
